@@ -113,46 +113,6 @@ class Train:
         self.concept_r = list()
         self.concept_r_tmp = list()
 
-        for i in range(len(self.instance_concept)):
-            for j in range(len(self.instance_concept[i])):
-                for k in range(len(self.concept_instance[self.instance_concept[i][j]])):
-                    if self.concept_instance[self.instance_concept[i][j]][k] != i:
-                        self.instance_brother[i].append(self.concept_instance[self.instance_concept[i][j]][k])
-
-        for i in range(len(self.sub_up_concept)):
-            for j in range(len(self.sub_up_concept[i])):
-                for k in range(len(self.up_sub_concept[self.sub_up_concept[i][j]])):
-                    if self.up_sub_concept[self.sub_up_concept[i][j]][k] != i:
-                        self.instance_brother[i].append(self.up_sub_concept[self.sub_up_concept[i][j]][k])
-
-        self.relation_vec = np.zeros([self.relation_num, self.n], dtype=np.float64)
-        self.entity_vec = np.zeros([self.entity_num, self.n], dtype=np.float64)
-        self.relation_tmp = np.zeros([self.relation_num, self.n], dtype=np.float64)
-        self.entity_tmp = np.zeros([self.entity_num, self.n], dtype=np.float64)
-        self.concept_vec = np.zeros([self.concept_num, self.n], dtype=np.float64)
-        self.concept_tmp = np.zeros([self.concept_num, self.n], dtype=np.float64)
-        self.concept_r = np.zeros([self.concept_num], dtype=np.float64)
-        self.concept_r = np.zeros([self.concept_num], dtype=np.float64)
-
-        for i in range(self.relation_num):
-            for ii in range(self.n):
-                self.relation_vec[i][ii] = rand_normal(0, 1.0 / self.n, -6 / math.sqrt(self.n), 6 / math.sqrt(self.n))
-
-        for i in range(self.entity_num):
-            for ii in range(self.n):
-                self.entity_vec[i][ii] = rand_normal(0, 1.0 / self.n, -6 / math.sqrt(self.n), 6 / math.sqrt(self.n))
-            self.entity_vec[i] = norm(self.entity_vec[i])
-
-        for i in range(self.concept_num):
-            for ii in range(self.n):
-                self.concept_vec[i][ii] = rand_normal(0, 1.0 / self.n, -6 / math.sqrt(self.n), 6 / math.sqrt(self.n))
-            self.concept_vec[i] = norm(self.concept_vec[i])
-
-        for i in range(self.concept_num):
-            self.concept_r[i] = rand(0, 1)
-
-        self.train_size = len(self.fb_h) + len(self.instance_of) + len(self.sub_class_of)
-
     def add_hrt(self, x, y, z):
         self.fb_h.append(x)
         self.fb_l.append(y)
@@ -394,6 +354,48 @@ class Train:
                 self.concept_tmp[c2_b][i] -= -x * self.rate
             self.concept_r_tmp[c1_b] -= 2 * self.concept_r[c1_b] * self.rate
             self.concept_r_tmp[c2_b] -= -2 * self.concept_r[c2_b] * self.rate
+        return True
+
+    def setup(self):
+        for i in range(len(self.instance_concept)):
+            for j in range(len(self.instance_concept[i])):
+                for k in range(len(self.concept_instance[self.instance_concept[i][j]])):
+                    if self.concept_instance[self.instance_concept[i][j]][k] != i:
+                        self.instance_brother[i].append(self.concept_instance[self.instance_concept[i][j]][k])
+
+        for i in range(len(self.sub_up_concept)):
+            for j in range(len(self.sub_up_concept[i])):
+                for k in range(len(self.up_sub_concept[self.sub_up_concept[i][j]])):
+                    if self.up_sub_concept[self.sub_up_concept[i][j]][k] != i:
+                        self.instance_brother[i].append(self.up_sub_concept[self.sub_up_concept[i][j]][k])
+
+        self.relation_vec = np.zeros([self.relation_num, self.n], dtype=np.float64)
+        self.entity_vec = np.zeros([self.entity_num, self.n], dtype=np.float64)
+        self.relation_tmp = np.zeros([self.relation_num, self.n], dtype=np.float64)
+        self.entity_tmp = np.zeros([self.entity_num, self.n], dtype=np.float64)
+        self.concept_vec = np.zeros([self.concept_num, self.n], dtype=np.float64)
+        self.concept_tmp = np.zeros([self.concept_num, self.n], dtype=np.float64)
+        self.concept_r = np.zeros([self.concept_num], dtype=np.float64)
+        self.concept_r = np.zeros([self.concept_num], dtype=np.float64)
+
+        for i in range(self.relation_num):
+            for ii in range(self.n):
+                self.relation_vec[i][ii] = rand_normal(0, 1.0 / self.n, -6 / math.sqrt(self.n), 6 / math.sqrt(self.n))
+
+        for i in range(self.entity_num):
+            for ii in range(self.n):
+                self.entity_vec[i][ii] = rand_normal(0, 1.0 / self.n, -6 / math.sqrt(self.n), 6 / math.sqrt(self.n))
+            self.entity_vec[i] = norm(self.entity_vec[i])
+
+        for i in range(self.concept_num):
+            for ii in range(self.n):
+                self.concept_vec[i][ii] = rand_normal(0, 1.0 / self.n, -6 / math.sqrt(self.n), 6 / math.sqrt(self.n))
+            self.concept_vec[i] = norm(self.concept_vec[i])
+
+        for i in range(self.concept_num):
+            self.concept_r[i] = rand(0, 1)
+
+        self.train_size = len(self.fb_h) + len(self.instance_of) + len(self.sub_class_of)
         return True
 
     def do_train(self):
