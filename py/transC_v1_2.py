@@ -372,7 +372,7 @@ class Train:
             for j in range(len(self.sub_up_concept[i])):
                 for k in range(len(self.up_sub_concept[self.sub_up_concept[i][j]])):
                     if self.up_sub_concept[self.sub_up_concept[i][j]][k] != i:
-                        self.instance_brother[i].append(self.up_sub_concept[self.sub_up_concept[i][j]][k])
+                        self.concept_brother[i].append(self.up_sub_concept[self.sub_up_concept[i][j]][k])
 
         self.relation_vec = np.zeros([self.relation_num, self.n], dtype=np.float64)
         self.entity_vec = np.zeros([self.entity_num, self.n], dtype=np.float64)
