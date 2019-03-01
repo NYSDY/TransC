@@ -530,7 +530,7 @@ def prepare(n, rate, margin, margin_instance, margin_subclass):
     instance_of_file = open("../data/" + dataSet + "/Train/instanceOf2id.txt", 'r', encoding='utf-8')
     sub_class_of_file = open("../data/" + dataSet + "/Train/subClassOf2id.txt", 'r', encoding='utf-8')
     while True:
-        line_list = instance_of_file.readline().strip('\n').split('\t')
+        line_list = instance_of_file.readline().strip('\n').split(' ')
         if len(line_list) != 2:
             break
         line_list = list(map(int, line_list))
@@ -539,7 +539,7 @@ def prepare(n, rate, margin, margin_instance, margin_subclass):
         concept_instance[line_list[1]].append(line_list[0])
 
     while True:
-        line_list = sub_class_of_file.readline().strip('\n').split('\t')
+        line_list = sub_class_of_file.readline().strip('\n').split(' ')
         if len(line_list) != 2:
             break
         line_list = list(map(int, line_list))
