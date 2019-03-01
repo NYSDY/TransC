@@ -2,13 +2,6 @@
 import random
 import math
 import numpy as np
-# import ptvsd
-#
-# # Allow other computers to attach to ptvsd at this IP address and port.
-# ptvsd.enable_attach(address=('10.108.168.167', 5678), redirect_output=True)
-#
-# # Pause the program until a remote debugger is attached
-# ptvsd.wait_for_attach()
 
 pi = 3.1415926535897932384626433832795
 
@@ -25,7 +18,7 @@ def rand(min_value, max_value):
 
 
 def normal(x, miu, sigma):
-    return 1.0 / math.sqrt(2 * pi) / sigma * math.exp(-1 * (x - miu) * (x - miu) / (2 * sigma * sigma))
+    return 1.0 / math.sqrt(2 * pi) / sigma * math.e ^ (-1 * (x - miu) * (x - miu) / (2 * sigma * sigma))
 
 
 def rand_normal(miu, sigma, min_value, max_value):
@@ -73,16 +66,26 @@ def rand_max(x):
     return remainder
 
 
+
+train_size = 0
+
+res = 0.0
+# concept_instance = list()
+# instance_concept = list()
+# instance_brother = list()
+# sub_up_concept = list()
+# up_sub_concept = list()
+# concept_brother = list()
+# left_entity = dict()
+# right_entity = dict()
+# left_num = dict()
+# right_num = dict()
+
+
 class Train:
     def __init__(self, n, rate, margin, margin_instance, margin_subclass, relation_num, entity_num, concept_num,
                  concept_instance, instance_concept, instance_brother, sub_up_concept, up_sub_concept, concept_brother,
                  left_num, right_num):
-        self.n = n
-        self.rate = rate
-        self.margin = margin
-        self.margin_instance = margin_instance
-        self.margin_subclass = margin_subclass
-        self.res = 0
 
         self.relation_num = relation_num
         self.entity_num = entity_num
@@ -131,6 +134,54 @@ class Train:
         self.instance_of_ok[(instance, concept)] = 1
         return True
 
+    def setup(self, n_in, rate_in, margin_in, margin_ins, margin_sub):
+        n = n_in
+        rate = rate_in
+        margin = margin_in
+        margin_instance = margin_ins
+        margin_subclass = margin_sub
+
+        for i in range(len(self.instance_concept)):
+            for j in range(len(self.instance_concept[i])):
+                for k in range(len(self.concept_instance[self.instance_concept[i][j]])):
+                    if self.concept_instance[self.instance_concept[i][j]][k] != i:
+                        self.instance_brother[i].append(self.concept_instance[self.instance_concept[i][j]][k])
+
+        for i in range(len(self.sub_up_concept)):
+            for j in range(len(self.sub_up_concept[i])):
+                for k in range(len(self.up_sub_concept[self.sub_up_concept[i][j]])):
+                    if self.up_sub_concept[self.sub_up_concept[i][j]][k] != i:
+                        self.instance_brother[i].append(self.up_sub_concept[self.sub_up_concept[i][j]][k])
+
+        self.relation_vec = np.zeros([self.relation_num, n], dtype=np.float64)
+        self.entity_vec = np.zeros([self.entity_num, n], dtype=np.float64)
+        self.relation_tmp = np.zeros([self.relation_num, n], dtype=np.float64)
+        self.entity_tmp = np.zeros([self.entity_num, n], dtype=np.float64)
+        self.concept_vec = np.zeros([self.concept_num, n], dtype=np.float64)
+        self.concept_tmp = np.zeros([self.concept_num, n], dtype=np.float64)
+        self.concept_r = np.zeros([self.concept_num], dtype=np.float64)
+        self.concept_r = np.zeros([self.concept_num], dtype=np.float64)
+
+        for i in range(self.relation_num):
+            for ii in range(n):
+                self.relation_vec[i][ii] = rand_normal(0, 1.0 / n, -6 / math.sqrt(n), 6 / math.sqrt(n))
+
+        for i in range(self.entity_num):
+            for ii in range(n):
+                self.entity_vec[i][ii] = rand_normal(0, 1.0 / n, -6 / math.sqrt(n), 6 / math.sqrt(n))
+            self.entity_vec[i] = norm(self.entity_vec[i])
+
+        for i in range(self.concept_num):
+            for ii in range(n):
+                self.concept_vec[i][ii] = rand_normal(0, 1.0 / n, -6 / math.sqrt(n), 6 / math.sqrt(n))
+            self.concept_vec[i] = norm(self.concept_vec[i])
+
+        for i in range(self.concept_num):
+            self.concept_r[i] = rand(0, 1)
+
+        train_size = len(self.fb_h) + len(self.instance_of) + len(self.sub_class_of)
+        return True
+
     def train_hlr(self, i, cut):
         pr = 500
         if bern:
@@ -169,6 +220,7 @@ class Train:
 
     def train_instance_of(self, i, cut):
         i = i - len(self.fb_h)
+        j = 0
         if random.randint(0, RAND_MAX) % 2 == 0:
             while True:
                 if self.instance_of[i][0] in self.instance_brother:
@@ -204,6 +256,7 @@ class Train:
 
     def train_sub_class_of(self, i, cut):
         i = i - len(self.fb_h) - len(self.instance_of)
+        j = 0
         if random.randint(0, RAND_MAX) % 2 == 0:
             while True:
                 if self.sub_class_of[i][0] in self.concept_brother:
@@ -241,40 +294,40 @@ class Train:
     def do_train_hlr(self, e1_a, e2_a, rel_a, e1_b, e2_b, rel_b):
         sum1 = self.calc_sum_hlt(e1_a, e2_a, rel_a)
         sum2 = self.calc_sum_hlt(e1_b, e2_b, rel_b)
-        if sum1 + self.margin > sum2:
-            self.res = self.res + self.margin + sum1 - sum2  # 为什么呀
+        if sum1 + margin > sum2:
+            res = res + margin + sum1 - sum2  # 为什么呀
             self.gradient_hlr(e1_a, e2_a, rel_a, e1_b, e2_b, rel_b)
         return True
 
     def do_train_instance_of(self, e_a, c_a, e_b, c_b):
         sum1 = self.calc_sum_instance_of(e_a, c_a)
         sum2 = self.calc_sum_instance_of(e_b, c_b)
-        if sum1 + self.margin_instance > sum2:
-            self.res += self.margin_instance + sum1 - sum2
+        if sum1 + margin_instance > sum2:
+            res += margin_instance + sum1 - sum2
             self.gradient_instance_of(e_a, c_a, e_b, c_b)
         return True
 
     def do_train_sub_class_of(self, c1_a, c2_a, c1_b, c2_b):
         sum1 = self.calc_sum_sub_class_of(c1_a, c2_a)
         sum2 = self.calc_sum_sub_class_of(c1_b, c2_b)
-        if sum1 + self.margin_subclass > sum2:
-            self.res += self.margin_subclass + sum1 - sum2
+        if sum1 + margin_subclass > sum2:
+            res += margin_subclass + sum1 - sum2
             self.gradient_sub_class_of(c1_a, c2_a, c1_b, c2_b)
         return True
 
     def calc_sum_hlt(self, e1, e2, rel):
         sum_value = 0
         if L1Flag:
-            for ii in range(self.n):  # n需要注意一下
+            for ii in range(n):  # n需要注意一下
                 sum_value += math.fabs(self.entity_vec[e2][ii] - self.entity_vec[e1][ii] - self.relation_vec[rel][ii])
         else:
-            for ii in range(self.n):  # n需要注意一下
+            for ii in range(n):  # n需要注意一下
                 sum_value += sqr(self.entity_vec[e2][ii] - self.entity_vec[e1][ii] - self.relation_vec[rel][ii])
         return sum_value
 
     def calc_sum_instance_of(self, e, c):
         dis = 0
-        for i in range(self.n):
+        for i in range(n):
             dis += sqr(self.entity_vec[e][i] - self.concept_vec[e][i])
         if dis < sqr(self.concept_r[c]):
             return 0
@@ -282,135 +335,93 @@ class Train:
 
     def calc_sum_sub_class_of(self, c1, c2):
         dis = 0
-        for i in range(self.n):
+        for i in range(n):
             dis += sqr(self.concept_vec[c1][i] - self.concept_vec[c2][i])
         if math.sqrt(dis) < math.fabs(self.concept_r[c1] - self.concept_r[c2]):
             return 0
         return dis - sqr(self.concept_r[c2]) - sqr(self.concept_r[c1])
 
     def gradient_hlr(self, e1_a, e2_a, rel_a, e1_b, e2_b, rel_b):
-        for ii in range(self.n):
+        for ii in range(n):
             x = 2 * (self.entity_vec[e2_a][ii] - self.entity_vec[e1_a][ii] - self.relation_vec[rel_a][ii])
             if L1Flag:
                 if x > 0:
                     x = 1
                 else:
                     x = -1
-            self.relation_tmp[rel_a][ii] -= -1 * self.rate * x
-            self.entity_tmp[e1_a][ii] -= -1 * self.rate * x
-            self.entity_tmp[e2_a][ii] += -1 * self.rate * x
+            self.relation_tmp[rel_a][ii] -= -1 * rate * x
+            self.entity_tmp[e1_a][ii] -= -1 * rate * x
+            self.entity_tmp[e2_a][ii] += -1 * rate * x
             x = 2 * (self.entity_vec[e2_b][ii] - self.entity_vec[e1_b][ii] - self.relation_vec[rel_b][ii])
             if L1Flag:
                 if x > 0:
                     x = 1
                 else:
                     x = -1
-            self.relation_tmp[rel_b][ii] -= self.rate * x
-            self.entity_tmp[e1_b][ii] -= self.rate * x
-            self.entity_tmp[e2_b][ii] += self.rate * x
+            self.relation_tmp[rel_b][ii] -= rate * x
+            self.entity_tmp[e1_b][ii] -= rate * x
+            self.entity_tmp[e2_b][ii] += rate * x
         return True
 
     def gradient_instance_of(self, e_a, c_a, e_b, c_b):
         dis = 0
-        for i in range(self.n):
+        for i in range(n):
             dis += sqr(self.entity_vec[e_a][i] - self.concept_vec[c_a][i])
         if dis > sqr(self.concept_r[c_a]):
-            for j in range(self.n):
+            for j in range(n):
                 x = 2 * (self.entity_vec[e_a][j] - self.concept_vec[c_a][j])
-                self.entity_tmp[e_a][j] -= x * self.rate
-                self.concept_tmp[c_a][j] -= -1 * x * self.rate
-            self.concept_r_tmp[c_a] -= -2 * self.concept_r[c_a] * self.rate
+                self.entity_tmp[e_a][j] -= x * rate
+                self.concept_tmp[c_a][j] -= -1 * x * rate
+            self.concept_r_tmp[c_a] -= -2 * self.concept_r[c_a] * rate
 
         dis = 0
-        for i in range(self.n):
+        for i in range(n):
             dis += sqr(self.entity_vec[e_b][i] - self.concept_vec[c_b][i])
         if dis > sqr(self.concept_r[c_b]):
-            for j in range(self.n):
+            for j in range(n):
                 x = 2 * (self.entity_vec[e_b][j] - self.concept_vec[c_b][j])
-                self.entity_tmp[e_b][j] -= x * self.rate
-                self.concept_tmp[c_b][j] -= -1 * x * self.rate
-            self.concept_r_tmp[c_b] -= -2 * self.concept_r[c_b] * self.rate
+                self.entity_tmp[e_b][j] -= x * rate
+                self.concept_tmp[c_b][j] -= -1 * x * rate
+            self.concept_r_tmp[c_b] -= -2 * self.concept_r[c_b] * rate
         return True
 
     def gradient_sub_class_of(self, c1_a, c2_a, c1_b, c2_b):
         dis = 0
-        for i in range(self.n):
+        for i in range(n):
             dis += sqr(self.concept_vec[c1_a][i] - self.concept_vec[c2_a][i])
         if math.sqrt(dis) > math.fabs(self.concept_r[c1_a] - self.concept_r[c2_a]):
-            for i in range(self.n):
+            for i in range(n):
                 x = 2 * (self.concept_vec[c1_a][i] - self.concept_vec[c2_a][i])
-                self.concept_tmp[c1_a][i] -= x * self.rate
-                self.concept_tmp[c2_a][i] -= -x * self.rate
-            self.concept_r_tmp[c1_a] -= 2 * self.concept_r[c1_a] * self.rate
-            self.concept_r_tmp[c2_a] -= -2 * self.concept_r[c2_a] * self.rate
+                self.concept_tmp[c1_a][i] -= x * rate
+                self.concept_tmp[c2_a][i] -= -x * rate
+            self.concept_r_tmp[c1_a] -= 2 * self.concept_r[c1_a] * rate
+            self.concept_r_tmp[c2_a] -= -2 * self.concept_r[c2_a] * rate
 
         dis = 0
-        for i in range(self.n):
+        for i in range(n):
             dis += sqr(self.concept_vec[c1_b][i] - self.concept_vec[c2_b][i])
         if math.sqrt(dis) > math.fabs(self.concept_r[c1_b] - self.concept_r[c2_b]):
-            for i in range(self.n):
+            for i in range(n):
                 x = 2 * (self.concept_vec[c1_b][i] - self.concept_vec[c2_b][i])
-                self.concept_tmp[c1_b][i] -= x * self.rate
-                self.concept_tmp[c2_b][i] -= -x * self.rate
-            self.concept_r_tmp[c1_b] -= 2 * self.concept_r[c1_b] * self.rate
-            self.concept_r_tmp[c2_b] -= -2 * self.concept_r[c2_b] * self.rate
-        return True
-
-    def setup(self):
-        for i in range(len(self.instance_concept)):
-            for j in range(len(self.instance_concept[i])):
-                for k in range(len(self.concept_instance[self.instance_concept[i][j]])):
-                    if self.concept_instance[self.instance_concept[i][j]][k] != i:
-                        self.instance_brother[i].append(self.concept_instance[self.instance_concept[i][j]][k])
-
-        for i in range(len(self.sub_up_concept)):
-            for j in range(len(self.sub_up_concept[i])):
-                for k in range(len(self.up_sub_concept[self.sub_up_concept[i][j]])):
-                    if self.up_sub_concept[self.sub_up_concept[i][j]][k] != i:
-                        self.instance_brother[i].append(self.up_sub_concept[self.sub_up_concept[i][j]][k])
-
-        self.relation_vec = np.zeros([self.relation_num, self.n], dtype=np.float64)
-        self.entity_vec = np.zeros([self.entity_num, self.n], dtype=np.float64)
-        self.relation_tmp = np.zeros([self.relation_num, self.n], dtype=np.float64)
-        self.entity_tmp = np.zeros([self.entity_num, self.n], dtype=np.float64)
-        self.concept_vec = np.zeros([self.concept_num, self.n], dtype=np.float64)
-        self.concept_tmp = np.zeros([self.concept_num, self.n], dtype=np.float64)
-        self.concept_r = np.zeros([self.concept_num], dtype=np.float64)
-        self.concept_r = np.zeros([self.concept_num], dtype=np.float64)
-
-        for i in range(self.relation_num):
-            for ii in range(self.n):
-                self.relation_vec[i][ii] = rand_normal(0, 1.0 / self.n, -6 / math.sqrt(self.n), 6 / math.sqrt(self.n))
-
-        for i in range(self.entity_num):
-            for ii in range(self.n):
-                self.entity_vec[i][ii] = rand_normal(0, 1.0 / self.n, -6 / math.sqrt(self.n), 6 / math.sqrt(self.n))
-            self.entity_vec[i] = norm(self.entity_vec[i])
-
-        for i in range(self.concept_num):
-            for ii in range(self.n):
-                self.concept_vec[i][ii] = rand_normal(0, 1.0 / self.n, -6 / math.sqrt(self.n), 6 / math.sqrt(self.n))
-            self.concept_vec[i] = norm(self.concept_vec[i])
-
-        for i in range(self.concept_num):
-            self.concept_r[i] = rand(0, 1)
-
-        self.train_size = len(self.fb_h) + len(self.instance_of) + len(self.sub_class_of)
+                self.concept_tmp[c1_b][i] -= x * rate
+                self.concept_tmp[c2_b][i] -= -x * rate
+            self.concept_r_tmp[c1_b] -= 2 * self.concept_r[c1_b] * rate
+            self.concept_r_tmp[c2_b] -= -2 * self.concept_r[c2_b] * rate
         return True
 
     def do_train(self):
         nbatches = 100
         nepoch = 1000
-        batch_size = self.train_size // nbatches
+        batch_size = train_size / nbatches
         for epoch in range(nepoch):
-            self.res = 0
+            res = 0
             for batch in range(nbatches):
                 self.relation_tmp = self.relation_vec
                 self.entity_tmp = self.entity_vec
                 self.concept_tmp = self.concept_vec
                 self.concept_r_tmp = self.concept_r
-                for k in range(batch_size):
-                    i = rand_max(self.train_size)
+                for k in range(train_size):
+                    i = rand_max(train_size)
                     if i < len(self.fb_r):
                         cut = 10 - int(epoch * 8.0 / nepoch)
                         self.train_hlr(i, cut)
@@ -426,7 +437,7 @@ class Train:
                 self.concept_r = self.concept_r_tmp
 
             if epoch % 1 == 0:
-                print('epoch:{},{}'.format(epoch, self.res))
+                print('epoch:{},{}'.format(epoch, res))
 
             if epoch % 500 == 0 or epoch == nepoch - 1:
                 f2 = open("../vector/" + dataSet + "/relation2vec.vec", 'w', encoding='utf-8')
@@ -434,30 +445,30 @@ class Train:
                 f4 = open("../vector/" + dataSet + "/concept2vec.vec", 'w', encoding='utf-8')
 
                 for i in range(self.relation_num):
-                    for ii in range(self.n):
+                    for ii in range(n):
                         ii_tmp = str(round(self.relation_vec[i][ii], 6))
                         f2.write(ii_tmp + '\t')
-                    f2.write('\self.n')
+                    f2.write('\n')
 
                 for i in range(self.entity_num):
-                    for ii in range(self.n):
+                    for ii in range(n):
                         ii_tmp = str(round(self.entity_vec[i][ii], 6))
                         f3.write(ii_tmp + '\t')
-                    f3.write('\self.n')
+                    f3.write('\n')
 
                 for i in range(self.concept_num):
-                    for ii in range(self.n):
+                    for ii in range(n):
                         ii_tmp = str(round(self.concept_vec[i][ii], 6))
                         f4.write(ii_tmp + '\t')
-                    f4.write('\self.n')
+                    f4.write('\n')
                     f4.write(self.concept_r[i] + '\t')
-                    f4.write('\self.n')
+                    f4.write('\n')
                 f2.close()
                 f3.close()
                 f4.close()
 
 
-def prepare(n, rate, margin, margin_instance, margin_subclass):
+def prepare():
     left_entity = dict()
     right_entity = dict()
     left_num = dict()
@@ -500,12 +511,11 @@ def prepare(n, rate, margin, margin_instance, margin_subclass):
     instance_brother = [[] for i in range(entity_num)]
     concept_brother = [[] for i in range(concept_num)]
 
-    train = Train(n, rate, margin, margin_instance, margin_subclass, relation_num, entity_num, concept_num,
-                  concept_instance, instance_concept, instance_brother, sub_up_concept, up_sub_concept, concept_brother,
-                  left_num, right_num)
+    train = Train(relation_num, entity_num, concept_num, concept_instance, instance_concept,
+                  instance_brother, sub_up_concept, up_sub_concept, concept_brother, left_num, right_num)
 
     while True:
-        line_list = f_kb.readline().strip('\n').split(' ')
+        line_list = f_kb.readline().strip('\n').split('\t')
         if len(line_list) != 3:
             break
         line_list = list(map(int, line_list))
@@ -546,10 +556,4 @@ def prepare(n, rate, margin, margin_instance, margin_subclass):
         train.add_sub_class_of(line_list[0], line_list[1])
         sub_up_concept[line_list[0]].append(line_list[1])
         up_sub_concept[line_list[1]].append(line_list[0])
-    return train
-
-
-if __name__ == '__main__':
-    random.seed(10)
-    train_ex = prepare(100, 0.001, 1, 0.4, 0.3)
-    train_ex.do_train()
+    return True
