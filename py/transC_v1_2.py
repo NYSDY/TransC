@@ -83,6 +83,7 @@ class Train:
         self.margin_instance = margin_instance
         self.margin_subclass = margin_subclass
         self.res = 0
+        self.train_size = 0
 
         self.relation_num = relation_num
         self.entity_num = entity_num
@@ -124,11 +125,15 @@ class Train:
     def add_sub_class_of(self, sub, parent):
         self.sub_class_of.append((sub, parent))
         self.sub_class_of_ok[(sub, parent)] = 1
+        self.sub_up_concept[sub].append(parent)
+        self.up_sub_concept[parent].append(sub)
         return True
 
     def add_instance_of(self, instance, concept):
         self.instance_of.append((instance, concept))
         self.instance_of_ok[(instance, concept)] = 1
+        self.instance_concept[instance].append(concept)
+        self.concept_instance[concept].append(instance)
         return True
 
     def train_hlr(self, i, cut):
@@ -535,8 +540,8 @@ def prepare(n, rate, margin, margin_instance, margin_subclass):
             break
         line_list = list(map(int, line_list))
         train.add_instance_of(line_list[0], line_list[1])
-        instance_concept[line_list[0]].append(line_list[1])  # some problems
-        concept_instance[line_list[1]].append(line_list[0])
+        # instance_concept[line_list[0]].append(line_list[1])  # 这个参数是类里面要用的
+        # concept_instance[line_list[1]].append(line_list[0])
 
     while True:
         line_list = sub_class_of_file.readline().strip('\n').split(' ')
@@ -544,12 +549,13 @@ def prepare(n, rate, margin, margin_instance, margin_subclass):
             break
         line_list = list(map(int, line_list))
         train.add_sub_class_of(line_list[0], line_list[1])
-        sub_up_concept[line_list[0]].append(line_list[1])
-        up_sub_concept[line_list[1]].append(line_list[0])
+        # sub_up_concept[line_list[0]].append(line_list[1])
+        # up_sub_concept[line_list[1]].append(line_list[0])
     return train
 
 
 if __name__ == '__main__':
     random.seed(10)
     train_ex = prepare(100, 0.001, 1, 0.4, 0.3)
+    train_ex.setup()
     train_ex.do_train()
