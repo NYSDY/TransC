@@ -218,7 +218,7 @@ pair<double, double> test(){
         cout << "recall: " << TP_sub * 100 / (TP_sub + FN_sub) << "%" << endl;
         p = TP_sub * 100 /(TP_sub + FP_sub), r = TP_sub * 100 / (TP_sub + FN_sub);
         cout << "F1-score: " << 2 * p * r / (p + r) << "%" << endl;
-
+        
         for(set<double>::iterator iter = concept_set.begin(); iter != concept_set.end(); ++iter){
             int index = *iter;
             TP_ins = TP_ins_map[index];

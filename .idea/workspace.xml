@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ff4bf68-1769-4105-9c8c-1bd1b2a7a4e9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/py/transC_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/py/transC_v1_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/transC_v1_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test_classification_isA.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/test_classification_isA.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/try_something.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/try_something.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,14 +15,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/TransC$transC_v1_2.coverage" NAME="transC_v1_2 Coverage Results" MODIFIED="1551438969182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/py" />
+    <SUITE FILE_PATH="coverage/TransC$transC_v1_2.coverage" NAME="transC_v1_2 Coverage Results" MODIFIED="1551660874560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/py" />
+    <SUITE FILE_PATH="coverage/TransC$try_something.coverage" NAME="try_something Coverage Results" MODIFIED="1551446367924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/TransC$transC_v1_1.coverage" NAME="transC_v1_1 Coverage Results" MODIFIED="1551426381964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/py" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="1691656232">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.opened" value="2" />
@@ -26,28 +31,32 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="cpp" value="7" />
-          <entry key="py" value="8" />
+          <entry key="cpp" value="12" />
+          <entry key="py" value="12" />
+          <entry key="pyi" value="1" />
+          <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="C++" value="7" />
-          <entry key="Python" value="8" />
+          <entry key="C++" value="12" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="12" />
+          <entry key="PythonStub" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cpp" value="1" />
           <entry key="dummy" value="1" />
-          <entry key="py" value="131" />
+          <entry key="py" value="277" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="C++" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="131" />
+          <entry key="Python" value="277" />
         </counts>
       </usages-collector>
     </session>
@@ -55,35 +64,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/py/transC_v1_1.py">
+        <entry file="file://$PROJECT_DIR$/src/test_classification_isA.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="509" selection-start-line="509" selection-end-line="510" />
-              <folding>
-                <element signature="e#20626#21049#0" />
-                <element signature="e#22286#22778#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/py/transC_v1_2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="371" column="22" selection-start-line="371" selection-start-column="22" selection-end-line="371" selection-end-column="22" />
-              <folding>
-                <marker date="1551442368425" expanded="true" signature="15262:17586" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test_link_prediction.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4373">
-              <caret line="138" column="38" lean-forward="true" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
+            <state relative-caret-position="22">
+              <caret line="215" selection-start-line="215" selection-end-line="216" />
             </state>
           </provider>
         </entry>
@@ -91,26 +75,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/transC.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
+            <state relative-caret-position="3104">
+              <caret line="594" column="26" lean-forward="true" selection-start-line="594" selection-start-column="26" selection-end-line="594" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/py/transC.py">
+        <entry file="file://$PROJECT_DIR$/py/transC_v1_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1846">
-              <caret selection-end-line="1" />
+            <state relative-caret-position="694">
+              <caret line="266" selection-start-line="266" selection-end-line="267" />
+              <folding>
+                <element signature="e#17#30#0" expanded="true" />
+                <marker date="1551663086614" expanded="true" signature="15266:17592" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/py/transC_v0.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/py/transC_v2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="117" column="27" lean-forward="true" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
+            <state relative-caret-position="176">
+              <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -120,6 +108,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>add_hrt</find>
+      <find>res</find>
+      <find>\n</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,6 +120,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/transC.cpp" />
         <option value="$PROJECT_DIR$/py/transC_v1_1.py" />
+        <option value="$PROJECT_DIR$/src/try_something.py" />
         <option value="$PROJECT_DIR$/py/transC_v1_2.py" />
       </list>
     </option>
@@ -140,9 +131,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="49" />
-    <option name="y" value="-877" />
+    <option name="y" value="23" />
     <option name="width" value="1386" />
     <option name="height" value="877" />
   </component>
@@ -162,28 +153,12 @@
             <path>
               <item name="TransC" type="b2602c69:ProjectViewProjectNode" />
               <item name="TransC" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TransC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TransC" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="YAGO39K" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TransC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TransC" type="462c0819:PsiDirectoryNode" />
               <item name="py" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TransC" type="b2602c69:ProjectViewProjectNode" />
               <item name="TransC" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TransC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TransC" type="462c0819:PsiDirectoryNode" />
-              <item name="vector" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -259,13 +234,37 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="try_something" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="TransC" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/try_something.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.transC_v1_1" />
       <item itemvalue="Python.transC_v1_2" />
+      <item itemvalue="Python.try_something" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.transC_v1_2" />
+        <item itemvalue="Python.try_something" />
         <item itemvalue="Python.transC_v1_1" />
       </list>
     </recent_temporary>
@@ -284,16 +283,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="49" y="-877" width="1386" height="877" extended-state="0" />
-    <editor active="true" />
+    <frame x="49" y="23" width="1386" height="877" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.171875" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.038690478" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.6165605" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.18216561" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4089172" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -317,15 +315,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/py/transC_v1_2.py</url>
-          <line>559</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="self.instance_of" />
@@ -334,24 +323,10 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test_classification_isA.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test_classification_normal.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/try_something.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -401,20 +376,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/transC.cpp">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/time.pyi">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/try_something.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
+          <caret column="2" selection-start-column="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/YAGO39K/M-Valid/instanceOf2id_negative.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test_classification_isA.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="215" selection-start-line="215" selection-end-line="216" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/transC.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3104">
+          <caret line="594" column="26" lean-forward="true" selection-start-line="594" selection-start-column="26" selection-end-line="594" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/py/transC_v1_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="371" column="22" selection-start-line="371" selection-start-column="22" selection-end-line="371" selection-end-column="22" />
+        <state relative-caret-position="694">
+          <caret line="266" selection-start-line="266" selection-end-line="267" />
           <folding>
-            <marker date="1551442368425" expanded="true" signature="15262:17586" ph="..." />
+            <element signature="e#17#30#0" expanded="true" />
+            <marker date="1551663086614" expanded="true" signature="15266:17592" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py/transC_v2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
         </state>
       </provider>
     </entry>

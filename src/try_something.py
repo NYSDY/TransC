@@ -1,6 +1,4 @@
-a = 4
-b = 5
-c = a + b
-d = a * b
-print(c)
-print(d)
+import time
+
+print(time.asctime(time.localtime(time.time())))
+print('start time:{}'.format(time.asctime(time.localtime(time.time()))))
